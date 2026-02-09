@@ -1,13 +1,15 @@
 class Solution:
     def isSubset(self, arr1, arr2):
-        freq = {}
-
-        for x in arr1:
-            freq[x] = freq.get(x, 0) + 1
+        used = [False] * len(arr1)
 
         for x in arr2:
-            if x not in freq or freq[x] == 0:
+            found = False
+            for i in range(len(arr1)):
+                if arr1[i] == x and not used[i]:
+                    used[i] = True
+                    found = True
+                    break
+            if not found:
                 return False
-            freq[x] -= 1
 
         return True
